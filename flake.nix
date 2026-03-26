@@ -18,7 +18,10 @@
   outputs = { self, nixpkgs, nixos-generators, home-manager, ... }:
   let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true; # Required for: mullvad-vpn, veracrypt
+    };
 
     # Shared module list — imported by both ISO and VM builds
     faradayModules = [
@@ -58,6 +61,9 @@
         }];
 
         system.stateVersion = "24.11";
+
+        # Allow unfree packages (mullvad-vpn, veracrypt)
+        nixpkgs.config.allowUnfree = true;
       }
     ];
   in {
