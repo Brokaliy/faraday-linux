@@ -812,6 +812,7 @@
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = true;
     };
+    gtk4.theme = null; # Use new default (suppress stateVersion warning)
   };
 
   # ---------------------------------------------------------------------------
@@ -867,10 +868,6 @@
     source  = /etc/faraday/fastfetch.jsonc;
     # onChange: fastfetch reads config at runtime, no restart needed
   };
-
-  # Starship (shell.nix sets STARSHIP_CONFIG=/etc/faraday/starship.toml, but
-  # also link the XDG path for tools that look there)
-  home.file.".config/starship.toml".source = /etc/faraday/starship.toml;
 
   # Kitty (home-manager programs.kitty writes ~/.config/kitty/kitty.conf;
   # we ALSO drop the asset file alongside it as kitty.faraday.conf for reference)

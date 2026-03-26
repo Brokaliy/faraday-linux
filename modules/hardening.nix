@@ -206,9 +206,6 @@
   # MISC HARDENING
   # ---------------------------------------------------------------------------
 
-  # Restrict /proc to owner only — prevents users from seeing each other's processes
-  security.hideProcessInformation = true;
-
   # Disable core dumps — core files can contain passwords, keys, decrypted data
   security.pam.loginLimits = [{
     domain = "*";
