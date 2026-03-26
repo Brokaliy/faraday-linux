@@ -230,13 +230,6 @@
       cache_min_ttl = 600;
       cache_max_ttl = 86400;
 
-      # Block common malware/tracking domains at DNS level
-      # (defense in depth — Tor already hides your traffic, but this blocks
-      #  DNS-based tracking for domains that resolve to first-party tracking)
-      blocked_names.blocked_names_file = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/nicehash/NiceHashQuickMiner/master/dnscrypt/blocked.txt";
-        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Update on first build
-      };
     };
   };
 
