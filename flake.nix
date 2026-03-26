@@ -68,26 +68,28 @@
       }
     ];
   in {
-    # --- ISO build (main artifact) ---
-    packages.${system}.iso = nixos-generators.nixosGenerate {
-      inherit system;
-      format = "iso";
-      modules = faradayModules ++ [{
-        isoImage = {
-          isoName = "faraday-linux-${self.shortRev or "dev"}.iso";
-          squashfsCompression = "zstd -Xcompression-level 19"; # Max compression
-          makeEfiBootable = true;
-          makeUsbBootable = true;
-          appendToMenuLabel = " — Faraday Privacy OS";
-        };
-      }];
-    };
+    packages.${system} = {
+      # --- ISO build (main artifact) ---
+      iso = nixos-generators.nixosGenerate {
+        inherit system;
+        format = "iso";
+        modules = faradayModules ++ [{
+          isoImage = {
+            isoName = "faraday-linux-${self.shortRev or "dev"}.iso";
+            squashfsCompression = "zstd -Xcompression-level 19";
+            makeEfiBootable = true;
+            makeUsbBootable = true;
+            appendToMenuLabel = " — Faraday Privacy OS";
+          };
+        }];
+      };
 
-    # --- VM build for local testing (no ISO overhead) ---
-    packages.${system}.vm = nixos-generators.nixosGenerate {
-      inherit system;
-      format = "vm";
-      modules = faradayModules;
+      # --- VM build for local testing (no ISO overhead) ---
+      vm = nixos-generators.nixosGenerate {
+        inherit system;
+        format = "vm";
+        modules = faradayModules;
+      };
     };
 
     # --- nixos-rebuild target (for installed systems) ---
