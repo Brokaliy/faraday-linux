@@ -116,6 +116,9 @@
   # ---------------------------------------------------------------------------
   networking.nftables = {
     enable = true;
+    # Skip build-time validation — the 'tor' system user exists at runtime
+    # but not in the Nix build sandbox, so skuid resolution would fail early.
+    checkRuleset = false;
     ruleset = ''
       # =========================================================
       # FARADAY FIREWALL — Tor transparent proxy + inbound block
@@ -129,18 +132,9 @@
         chain input {
           type filter hook input priority 0; policy drop;
 
-          # Allow established/related connections
           ct state { established, related } accept
-
-          # Allow loopback
           iif lo accept
-
-          # Drop invalid packets
           ct state invalid drop
-
-          # Allow ICMP (within the machine) but not from outside
-          # Comment this out for full ICMP silence
-          # icmp type echo-request drop
         }
 
         # ---------------------------------------------------------
@@ -151,44 +145,44 @@
         }
 
         # ---------------------------------------------------------
-        # OUTPUT — NAT redirect to Tor (transparent proxy)
+        # OUTPUT NAT — redirect all traffic through Tor TransProxy
+        # 'meta skuid tor return' exempts Tor itself from the redirect
+        # so it doesn't loop. The tor system user is created before
+        # nftables loads at runtime (NixOS activation scripts run first).
         # ---------------------------------------------------------
         chain output_nat {
           type nat hook output priority -100;
 
-          # Exempt Tor process itself (uid 'tor') from redirection
-          # — otherwise it would loop back into itself
+          # Exempt Tor's own outbound connections — prevents redirect loop
           meta skuid tor return
 
-          # Loopback traffic doesn't need to go through Tor
+          # Loopback never needs to go through Tor
           oif lo return
 
-          # Redirect DNS (UDP + TCP port 53) to Tor's DNSPort
-          udp dport 53 redirect to :5353
-          tcp dport 53 redirect to :5353
+          # Redirect DNS to Tor's DNSPort (resolves .onion + hides DNS)
+          meta l4proto udp udp dport 53 redirect to :5353
+          meta l4proto tcp tcp dport 53 redirect to :5353
 
           # Redirect all TCP to Tor's TransPort
-          tcp redirect to :9040
+          meta l4proto tcp redirect to :9040
         }
 
         chain output_filter {
           type filter hook output priority 0; policy accept;
 
-          # Allow Tor process to reach the internet directly
+          # Allow Tor's own outbound traffic through unconditionally
           meta skuid tor accept
 
           # Allow loopback
           oif lo accept
 
-          # Drop UDP (non-DNS) — Tor can't proxy it, so it must not leak
-          # This blocks WebRTC, NTP (we use systemd-timesyncd over TCP), etc.
-          udp drop
+          # Drop all UDP except DNS (already redirected above).
+          # Tor cannot proxy UDP — better to drop than to leak.
+          meta l4proto udp drop
 
-          # Allow established TCP
+          # Allow established/related and new TCP
           ct state { established, related } accept
-
-          # Allow new TCP (will be caught by NAT chain above and redirected to Tor)
-          tcp ct state new accept
+          ct state new accept
         }
       }
     '';
