@@ -42,14 +42,7 @@
           password = "";
         };
 
-        # Autologin to Hyprland
-        services.greetd = {
-          enable = true;
-          settings.default_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
-            user = "faraday";
-          };
-        };
+        # greetd is configured in modules/desktop.nix
 
         # Home-manager config for the live user
         home-manager = {

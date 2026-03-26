@@ -36,7 +36,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --greeting 'Faraday Linux' --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --greeting 'Faraday Linux' --cmd Hyprland";
         user = "greeter";
       };
     };
