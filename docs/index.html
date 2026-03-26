@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faraday Linux — Privacy OS</title>
+  <meta name="description" content="A NixOS-based privacy OS. All traffic through Tor. Hardened kernel. LUKS encryption. Modern Hyprland desktop. Built for humans, not just hackers.">
+  <meta property="og:title" content="Faraday Linux">
+  <meta property="og:description" content="Privacy-first NixOS. Tails meets modern Hyprland.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="cage-icon">⊞</span>
+        <span>Faraday Linux</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#desktop">Desktop</a>
+        <a href="#install">Install</a>
+        <a href="https://github.com/Brokaliy/faraday-linux" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/Brokaliy/faraday-linux/releases" class="btn-nav" target="_blank" rel="noopener">Download</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-cage" aria-hidden="true">
+      <div class="cage-grid">
+        <div class="cage-cell lit"></div><div class="cage-cell lit"></div><div class="cage-cell lit"></div><div class="cage-cell lit"></div><div class="cage-cell"></div>
+        <div class="cage-cell lit"></div><div class="cage-cell"></div><div class="cage-cell"></div><div class="cage-cell"></div><div class="cage-cell"></div>
+        <div class="cage-cell lit"></div><div class="cage-cell lit"></div><div class="cage-cell lit"></div><div class="cage-cell"></div><div class="cage-cell"></div>
+        <div class="cage-cell lit"></div><div class="cage-cell"></div><div class="cage-cell"></div><div class="cage-cell"></div><div class="cage-cell"></div>
+        <div class="cage-cell lit"></div><div class="cage-cell"></div><div class="cage-cell"></div><div class="cage-cell"></div><div class="cage-cell"></div>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">NixOS-based · Open Source · v1.0</div>
+      <h1>Faraday<br><span class="accent">Linux</span></h1>
+      <p class="hero-sub">A Faraday cage blocks electromagnetic fields.<br>
+      Faraday Linux blocks surveillance.</p>
+      <p class="hero-desc">All traffic through Tor. Hardened kernel. LUKS encryption enforced.<br>
+      A Hyprland desktop that normal people can actually use.</p>
+      <div class="hero-actions">
+        <a href="https://github.com/Brokaliy/faraday-linux/releases" class="btn-primary" target="_blank" rel="noopener">
+          Download ISO
+        </a>
+        <a href="https://github.com/Brokaliy/faraday-linux" class="btn-secondary" target="_blank" rel="noopener">
+          View Source
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-val">100%</span><span class="stat-label">Tor routed</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-val">0</span><span class="stat-label">History saved</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-val">AES-256</span><span class="stat-label">Disk encryption</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Terminal preview ─────────────────────────────────────── -->
+  <section class="terminal-section">
+    <div class="container">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="terminal-title">faraday ~ fastfetch</span>
+        </div>
+        <div class="terminal-body">
+          <div class="term-logo">
+<pre class="cage-art"><span class="c1">  ╔══╦══╦══╦══╦══╗</span>
+<span class="c1">  ║</span><span class="c2">██</span><span class="c1">║</span><span class="c2">██</span><span class="c1">║</span><span class="c2">██</span><span class="c1">║</span><span class="c2">██</span><span class="c1">║  ║</span>
+<span class="c1">  ╠══╬══╬══╬══╬══╣</span>
+<span class="c1">  ║</span><span class="c2">██</span><span class="c1">║  ║  ║  ║  ║</span>
+<span class="c1">  ╠══╬══╬══╬══╬══╣</span>
+<span class="c1">  ║</span><span class="c2">██</span><span class="c1">║</span><span class="c2">██</span><span class="c1">║</span><span class="c2">██</span><span class="c1">║  ║  ║</span>
+<span class="c1">  ╠══╬══╬══╬══╬══╣</span>
+<span class="c1">  ║</span><span class="c2">██</span><span class="c1">║  ║  ║  ║  ║</span>
+<span class="c1">  ╠══╬══╬══╬══╬══╣</span>
+<span class="c1">  ║</span><span class="c2">██</span><span class="c1">║  ║  ║  ║  ║</span>
+<span class="c1">  ╚══╩══╩══╩══╩══╝</span>
+<span class="c2">  ─── FARADAY LINUX ───</span>
+<span class="c1">       privacy os</span></pre>
+          </div>
+          <div class="term-info">
+            <div class="term-title-line"><span class="c2">faraday</span><span class="c1">@</span><span class="c2">faraday</span></div>
+            <div class="term-sep c1">──────────────────</div>
+            <div class="term-row"><span class="key c2"> OS</span><span class="val">Faraday Linux 1.0</span></div>
+            <div class="term-row"><span class="key c2"> Kernel</span><span class="val">6.12.x-hardened</span></div>
+            <div class="term-row"><span class="key c2">󱑃 Uptime</span><span class="val">3 hours, 12 mins</span></div>
+            <div class="term-row"><span class="key c2"> Shell</span><span class="val">fish 3.7.1</span></div>
+            <div class="term-row"><span class="key c2"> Terminal</span><span class="val">kitty 0.36</span></div>
+            <div class="term-row"><span class="key c2"> CPU</span><span class="val">Intel i7-1165G7</span></div>
+            <div class="term-row"><span class="key c2">󰍛 Memory</span><span class="val">2.1 GiB / 16 GiB</span></div>
+            <div class="term-sep c1">──────────────────</div>
+            <div class="term-row"><span class="key c2">󰦝 Tor</span><span class="val green">active</span></div>
+            <div class="term-row"><span class="key c2">󰖂 VPN</span><span class="val">Mullvad — connected</span></div>
+            <div class="term-row"><span class="key c2">󰩠 DNS</span><span class="val green">encrypted</span></div>
+            <div class="term-colors">
+              <span class="swatch" style="background:#0d1117"></span>
+              <span class="swatch" style="background:#f7768e"></span>
+              <span class="swatch" style="background:#9ece6a"></span>
+              <span class="swatch" style="background:#e0af68"></span>
+              <span class="swatch" style="background:#4a9eff"></span>
+              <span class="swatch" style="background:#bb9af7"></span>
+              <span class="swatch" style="background:#7dcfff"></span>
+              <span class="swatch" style="background:#c0caf5"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ─────────────────────────────────────────────── -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-label">Security</div>
+      <h2>Hardened at every layer</h2>
+      <p class="section-sub">Every decision is documented. Every feature can be toggled.</p>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">󰦝</div>
+          <h3>Tor by Default</h3>
+          <p>All TCP is transparently proxied through Tor via nftables. No configuration required. Apps need zero changes.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>Hardened Kernel</h3>
+          <p><code>linux-hardened</code> with KASLR, stack canaries, restricted ptrace, hardened usercopy, and full sysctl paranoia.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>LUKS2 Encryption</h3>
+          <p>Full disk encryption enforced by the installer. Argon2id key derivation resists GPU brute-force. No plaintext swap.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">󰩠</div>
+          <h3>Encrypted DNS</h3>
+          <p>DNS routed through Tor's DNSPort — no DNS leaks. dnscrypt-proxy as a fallback layer with DoH.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">󰛵</div>
+          <h3>MAC Randomization</h3>
+          <p>Network interface MAC randomized on every connection. Prevents cross-network tracking.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>AppArmor</h3>
+          <p>Mandatory access control confines every app. Compromised processes can't escape their sandbox.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>USBGuard</h3>
+          <p>Unknown USB devices blocked by default. Stops BadUSB and rubber-ducky attacks cold.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"></div>
+          <h3>Camera &amp; Mic Off</h3>
+          <p>Webcam and microphone drivers blacklisted at kernel level. You choose when to enable them.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">󰖂</div>
+          <h3>Mullvad VPN</h3>
+          <p>Optional second layer. No-logs, accepts cash and Monero, RAM-only servers. Works over Tor.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Desktop ───────────────────────────────────────────────── -->
+  <section class="desktop-section" id="desktop">
+    <div class="container">
+      <div class="section-label">Desktop</div>
+      <h2>Modern. Minimal. Actually usable.</h2>
+      <p class="section-sub">Built on Hyprland — Wayland only, no X11 side-channels. Looks good without sacrificing security.</p>
+      <div class="desktop-grid">
+        <div class="desktop-feature">
+          <div class="df-icon">⬡</div>
+          <div>
+            <h4>Hyprland + Waybar</h4>
+            <p>Tiling compositor with animated borders, blur, and a Tor-status indicator in the bar.</p>
+          </div>
+        </div>
+        <div class="desktop-feature">
+          <div class="df-icon"></div>
+          <div>
+            <h4>Kitty Terminal</h4>
+            <p>GPU-accelerated, ligatures, 0.95 opacity with blur. JetBrainsMono Nerd Font throughout.</p>
+          </div>
+        </div>
+        <div class="desktop-feature">
+          <div class="df-icon"></div>
+          <div>
+            <h4>Hardened Firefox</h4>
+            <p>WebRTC off. SOCKS5→Tor locked via policy. uBlock Origin force-installed. No telemetry.</p>
+          </div>
+        </div>
+        <div class="desktop-feature">
+          <div class="df-icon">󰦝</div>
+          <div>
+            <h4>Privacy Apps</h4>
+            <p>Signal, KeePassXC, Mullvad, Tor Browser, mat2 metadata stripper — all preinstalled.</p>
+          </div>
+        </div>
+        <div class="desktop-feature">
+          <div class="df-icon"> </div>
+          <div>
+            <h4>Fish + Starship</h4>
+            <p>No shell history. Tor/VPN/DNS status in the prompt. fastfetch on every new terminal.</p>
+          </div>
+        </div>
+        <div class="desktop-feature">
+          <div class="df-icon"></div>
+          <div>
+            <h4>Calamares Installer</h4>
+            <p>Custom branded installer with LUKS enforced. Each screen explains what a privacy feature does.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Install ───────────────────────────────────────────────── -->
+  <section class="install-section" id="install">
+    <div class="container">
+      <div class="section-label">Install</div>
+      <h2>Three steps to private.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h3>Download the ISO</h3>
+            <p>Grab the latest ISO from GitHub Releases. Built automatically by GitHub Actions on every commit.</p>
+            <a href="https://github.com/Brokaliy/faraday-linux/releases" class="step-link" target="_blank" rel="noopener">
+              github.com/Brokaliy/faraday-linux/releases →
+            </a>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h3>Write to USB</h3>
+            <p>Flash the ISO to a USB drive. Works with any 4GB+ drive.</p>
+            <div class="code-block">
+              <code>sudo dd if=faraday-linux.iso of=/dev/sdX bs=4M status=progress</code>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h3>Boot &amp; Install</h3>
+            <p>Boot from USB. Use the live desktop to try it first, then launch the installer from the desktop. LUKS passphrase required — no way around it.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="vm-note">
+        <span class="vm-label">Testing in a VM?</span>
+        VMware or VirtualBox work fine. Set RAM to 4GB+, enable 3D acceleration, boot the ISO.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ──────────────────────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-cage" aria-hidden="true">╔══╦══╦══╦══╗<br>╠══╬══╬══╬══╣<br>╚══╩══╩══╩══╝</div>
+      <h2>Start browsing without a trace.</h2>
+      <p>Faraday Linux is free, open source, and always will be.</p>
+      <div class="cta-actions">
+        <a href="https://github.com/Brokaliy/faraday-linux/releases" class="btn-primary" target="_blank" rel="noopener">Download ISO</a>
+        <a href="https://github.com/Brokaliy/faraday-linux" class="btn-secondary" target="_blank" rel="noopener">Star on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="cage-icon">⊞</span> Faraday Linux
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/Brokaliy/faraday-linux" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/Brokaliy/faraday-linux/releases" target="_blank" rel="noopener">Releases</a>
+          <a href="https://github.com/Brokaliy/faraday-linux/issues" target="_blank" rel="noopener">Issues</a>
+        </div>
+        <div class="footer-note">MIT License · Built with NixOS</div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
