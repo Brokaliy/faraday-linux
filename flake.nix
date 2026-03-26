@@ -74,7 +74,7 @@
         format = "iso";
         modules = faradayModules ++ [{
           isoImage = {
-            isoName = "faraday-linux-${self.shortRev or "dev"}.iso";
+            isoName = "faraday-linux.iso";
             squashfsCompression = "zstd -Xcompression-level 19";
             makeEfiBootable = true;
             makeUsbBootable = true;

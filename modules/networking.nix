@@ -200,7 +200,7 @@
   # (e.g. during boot before Tor starts, or for Tor's own lookups).
   # Also provides a fallback encrypted DNS layer.
   # ---------------------------------------------------------------------------
-  services.dnscrypt-proxy2 = {
+  services.dnscrypt-proxy = {
     enable = true;
     settings = {
       # Listen on a non-standard port to not conflict with Tor's DNSPort

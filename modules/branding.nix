@@ -177,7 +177,7 @@
       check "Firewall"     "systemctl is-active nftables"
       check "AppArmor"     "systemctl is-active apparmor"
       check "USBGuard"     "systemctl is-active usbguard"
-      check "DNSCrypt"     "systemctl is-active dnscrypt-proxy2"
+      check "DNSCrypt"     "systemctl is-active dnscrypt-proxy"
       check "Mullvad VPN"  "systemctl is-active mullvad-daemon"
 
       echo ""

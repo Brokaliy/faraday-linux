@@ -72,7 +72,7 @@
       nerd-fonts.fira-code        # Ligature support
       inter                        # UI sans-serif
       noto-fonts                   # Unicode coverage
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ];
     fontconfig = {
       defaultFonts = {
