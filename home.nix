@@ -853,27 +853,16 @@
 
   # ---------------------------------------------------------------------------
   # CONFIG FILE SYMLINKS
-  # Point ~/.config/ entries at /etc/faraday/ so nixos-rebuild updates them
-  # automatically. The source is the Nix store path of the deployed system file.
-  #
-  # Why symlinks to /etc/faraday/ rather than direct store paths?
-  # → /etc/faraday/ files are updated by nixos-rebuild via environment.etc.
-  #   If we pointed home.file directly at the flake's asset paths, a user who
-  #   only does `nixos-rebuild` (not home-manager rebuild) would get stale
-  #   links. Pointing at /etc/faraday/ means rebuild-once-updates-all.
+  # Source directly from the flake's asset files (in the Nix store at eval time).
+  # Pure flake evaluation forbids referencing /etc/ paths at build time.
   # ---------------------------------------------------------------------------
 
   # Fastfetch
-  home.file.".config/fastfetch/config.jsonc" = {
-    source  = /etc/faraday/fastfetch.jsonc;
-    # onChange: fastfetch reads config at runtime, no restart needed
-  };
+  home.file.".config/fastfetch/config.jsonc".source = ./assets/shell/fastfetch.jsonc;
 
-  # Kitty (home-manager programs.kitty writes ~/.config/kitty/kitty.conf;
-  # we ALSO drop the asset file alongside it as kitty.faraday.conf for reference)
-  home.file.".config/kitty/kitty.faraday.conf".source = /etc/faraday/kitty.conf;
+  # Kitty reference copy alongside home-manager's generated kitty.conf
+  home.file.".config/kitty/kitty.faraday.conf".source = ./assets/kitty/kitty.conf;
 
-  # Fish — drop our config as a conf.d snippet so it's sourced on top of
-  # any system fish config without overwriting ~/.config/fish/config.fish
-  home.file.".config/fish/conf.d/faraday.fish".source = /etc/faraday/config.fish;
+  # Fish conf.d snippet — sourced automatically by fish on startup
+  home.file.".config/fish/conf.d/faraday.fish".source = ./assets/shell/config.fish;
 }
