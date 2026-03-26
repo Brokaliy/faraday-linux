@@ -1,0 +1,144 @@
+# =============================================================================
+# /etc/faraday/bashrc — Faraday Linux bash configuration
+# Sourced for all interactive bash sessions via programs.bash.interactiveShellInit
+# =============================================================================
+
+# Only run for interactive shells
+[[ $- != *i* ]] && return
+
+# =============================================================================
+# PRIVACY — NO SHELL HISTORY
+# History files are a forensic artifact. On a privacy OS, we never write them.
+# HISTSIZE=0   : no lines kept in memory
+# HISTFILESIZE=0 : history file truncated to 0 lines on open
+# unset HISTFILE : bash won't write a history file at all
+# =============================================================================
+unset HISTFILE
+export HISTSIZE=0
+export HISTFILESIZE=0
+export HISTCONTROL=ignoreboth:erasedups
+# Prevent subshells from writing history either
+export HISTFILE=/dev/null
+
+# =============================================================================
+# ENVIRONMENT
+# =============================================================================
+export EDITOR="nvim"
+export VISUAL="nvim"
+export BROWSER="firefox"
+export PAGER="bat --paging=always"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"  # Colorized man pages via bat
+
+# Tor SOCKS5 proxy — used by curl, wget, git etc. when not torified by nftables
+export ALL_PROXY="socks5://127.0.0.1:9050"
+export HTTPS_PROXY="socks5://127.0.0.1:9050"
+export HTTP_PROXY="socks5://127.0.0.1:9050"
+# Don't proxy loopback (would break local services)
+export NO_PROXY="localhost,127.0.0.1,::1"
+
+# =============================================================================
+# PROMPT COLORS (used by starship and fallback PS1)
+# =============================================================================
+CYAN='\[\033[38;2;125;207;255m\]'
+BOLD_CYAN='\[\033[1;38;2;125;207;255m\]'
+RED='\[\033[0;31m\]'
+RESET='\[\033[0m\]'
+
+# =============================================================================
+# ALIASES
+# =============================================================================
+
+# --- File navigation ---
+alias ls='eza --icons --group-directories-first'
+alias ll='eza -la --icons --git --group-directories-first'
+alias la='eza -a --icons --group-directories-first'
+alias lt='eza --tree --icons --level=2'
+alias l='eza -l --icons'
+
+# --- Better defaults ---
+alias cat='bat --theme=base16'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip --color=auto'
+alias cls='clear'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# --- NixOS system management ---
+alias update='sudo nixos-rebuild switch --flake /etc/nixos#faraday'
+alias update-test='sudo nixos-rebuild test --flake /etc/nixos#faraday'
+alias nix-clean='sudo nix-collect-garbage -d && sudo nix store optimise'
+alias nix-gen='sudo nix-env --list-generations --profile /nix/var/nix/profiles/system'
+alias nix-rollback='sudo nixos-rebuild switch --rollback'
+
+# --- Faraday / privacy tools ---
+alias tor-status='systemctl status tor'
+alias tor-restart='sudo systemctl restart tor'
+alias vpn-status='mullvad status'
+alias vpn-on='mullvad connect'
+alias vpn-off='mullvad disconnect'
+alias myip='torify curl -s https://api.ipify.org && echo'
+alias check-tor='torify curl -s https://check.torproject.org/api/ip | jq .'
+alias mac-show='ip link show | grep "link/ether"'
+
+# --- Safety ---
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# --- Git (torified) ---
+alias git='torify git'
+
+# =============================================================================
+# FUNCTIONS
+# =============================================================================
+
+# Quick note to RAM-only tmpfs (erased on reboot — no secrets on disk)
+note() {
+    local notefile="/tmp/faraday-note-$(date +%s)"
+    "${EDITOR:-nvim}" "$notefile"
+    echo "[note saved to $notefile — erased on reboot]"
+}
+
+# Encrypt a file with age (modern encryption)
+encrypt() {
+    [[ -z "$1" ]] && { echo "Usage: encrypt <file> [recipient-pubkey]"; return 1; }
+    local out="${1}.age"
+    if [[ -n "$2" ]]; then
+        age -r "$2" -o "$out" "$1" && echo "Encrypted → $out"
+    else
+        age -p -o "$out" "$1" && echo "Encrypted → $out (passphrase)"
+    fi
+}
+
+# Wipe a file securely (shred + remove)
+wipe() {
+    [[ -z "$1" ]] && { echo "Usage: wipe <file>"; return 1; }
+    shred -vzu -n 3 "$1" && echo "Wiped: $1"
+}
+
+# Strip metadata from a file (uses mat2)
+scrub() {
+    [[ -z "$1" ]] && { echo "Usage: scrub <file>"; return 1; }
+    mat2 --inplace "$1" && echo "Metadata stripped: $1"
+}
+
+# =============================================================================
+# FASTFETCH on new interactive sessions
+# Shows system info + Tor/VPN/DNS status on every new terminal
+# =============================================================================
+if command -v fastfetch &>/dev/null; then
+    fastfetch --config /etc/faraday/fastfetch.jsonc
+fi
+
+# =============================================================================
+# STARSHIP PROMPT
+# Must be last — initializes the prompt
+# =============================================================================
+if command -v starship &>/dev/null; then
+    export STARSHIP_CONFIG=/etc/faraday/starship.toml
+    eval "$(starship init bash)"
+else
+    # Fallback minimal prompt if starship not available
+    PS1="${BOLD_CYAN}[faraday]${RESET} ${CYAN}\w${RESET} \$ "
+fi

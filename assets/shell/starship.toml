@@ -1,0 +1,159 @@
+# =============================================================================
+# Faraday Linux — Starship Prompt
+# Theme: deep blue/black (#0a0d14) with cyan (#7dcfff) accents
+# Requires: Nerd Font (JetBrainsMono Nerd Font)
+# =============================================================================
+
+# Full format: two-line prompt
+# Line 1: ╭─ user@host  dir  git  lang_versions  cmd_duration
+# Line 2: ╰─ ❯
+format = """
+[╭─](bold #7dcfff)\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$golang\
+$docker_context\
+$cmd_duration\
+$fill\
+$time\
+$line_break\
+[╰─](bold #7dcfff)\
+$character"""
+
+# Don't add a blank line before prompt
+add_newline = false
+
+# ── Prompt character ─────────────────────────────────────────────────────────
+
+[character]
+success_symbol = "[❯](bold #7dcfff)"
+error_symbol   = "[❯](bold red)"
+vimcmd_symbol  = "[❮](bold #4a9eff)"
+
+# ── User / Host ──────────────────────────────────────────────────────────────
+
+[username]
+show_always  = true
+format       = "[$user]($style)"
+style_user   = "bold #7dcfff"
+style_root   = "bold red"
+disabled     = false
+
+[hostname]
+ssh_only  = false
+format    = "[@$hostname](bold #4a6fa5) "
+disabled  = false
+
+# ── Directory ────────────────────────────────────────────────────────────────
+
+[directory]
+format            = "[$path]($style)[$read_only](bold red) "
+style             = "bold #7dcfff"
+truncation_length = 3
+truncate_to_repo  = true
+read_only         = " 󰌾"
+# Substitute long paths with short aliases
+substitutions     = { "~" = "~", "/etc/nixos" = "󱄅 nixos" }
+
+# ── Git ──────────────────────────────────────────────────────────────────────
+
+[git_branch]
+format = "[ $symbol$branch(:$remote_branch)]($style) "
+style  = "bold #4a9eff"
+symbol = " "
+
+[git_status]
+# Red when dirty — makes it obvious you have uncommitted work
+format      = "([$all_status$ahead_behind]($style) )"
+style       = "bold red"
+conflicted  = "⚡"
+ahead       = "⬆${count}"
+behind      = "⬇${count}"
+diverged    = "⇕⬆${ahead_count}⬇${behind_count}"
+up_to_date  = ""          # Show nothing when clean — no visual noise
+untracked   = "[?${count}](yellow)"
+stashed     = "[󰆓${count}](#bd93f9)"
+modified    = "[✎${count}](yellow)"
+staged      = "[+${count}](green)"
+renamed     = "[»${count}](cyan)"
+deleted     = "[✗${count}](red)"
+
+# ── Language versions (shown only when in relevant project dirs) ──────────────
+
+[python]
+format          = "[ ${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style) "
+style           = "bold yellow"
+symbol          = " "
+detect_files    = ["*.py", "requirements.txt", "pyproject.toml", ".python-version"]
+detect_folders  = [".venv", "venv"]
+
+[nodejs]
+format          = "[ $symbol($version)]($style) "
+style           = "bold #6cc24a"
+symbol          = " "
+detect_files    = ["package.json", ".nvmrc", ".node-version"]
+detect_folders  = ["node_modules"]
+
+[rust]
+format          = "[ $symbol($version)]($style) "
+style           = "bold #f74c00"
+symbol          = " "
+detect_files    = ["Cargo.toml", "Cargo.lock"]
+
+[golang]
+format          = "[ $symbol($version)]($style) "
+style           = "bold #00acd7"
+symbol          = " "
+detect_files    = ["go.mod", "go.sum"]
+detect_folders  = ["vendor"]
+
+[docker_context]
+format          = "[ $symbol$context]($style) "
+style           = "bold #2496ed"
+symbol          = " "
+detect_files    = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+
+# ── Command duration ─────────────────────────────────────────────────────────
+# Shows elapsed time for commands that take more than 2 seconds
+
+[cmd_duration]
+min_time            = 2000          # 2 seconds
+format              = "[ $duration]($style) "
+style               = "bold yellow"
+show_milliseconds   = false
+show_notifications  = false
+
+# ── Clock (right-aligned via $fill) ──────────────────────────────────────────
+
+[fill]
+symbol = " "
+
+[time]
+disabled    = false
+format      = "[$time]($style) "
+style       = "#1a1f2e"        # Very dim — subtle clock on the right
+time_format = "%H:%M"
+use_12hr    = false
+
+# ── NixOS / Nix shell ────────────────────────────────────────────────────────
+
+[nix_shell]
+format  = "[ $symbol$state( \\($name\\))]($style) "
+style   = "bold #5277c3"
+symbol  = "󱄅 "
+heuristic = true
+
+# ── Disable unused modules for speed ─────────────────────────────────────────
+
+[aws]       disabled = true
+[azure]     disabled = true
+[gcloud]    disabled = true
+[terraform] disabled = true
+[kubernetes]disabled = true
+[package]   disabled = true     # Package version — too slow in large repos

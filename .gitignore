@@ -1,0 +1,4 @@
+result/
+*.log
+.direnv/
+*.qcow2

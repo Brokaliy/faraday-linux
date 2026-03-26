@@ -1,0 +1,59 @@
+name: Build Faraday ISO
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:   # Manual trigger from GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Needs a beefy runner for a NixOS ISO build
+    # Free tier works but is slow (~45 min). Self-hosted is faster.
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Set up Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+        # Caches Nix store between runs — dramatically speeds up rebuilds
+
+      - name: Create placeholder assets (if missing)
+        run: |
+          # build.sh handles this, but do it early so Nix eval doesn't fail
+          if [ ! -f assets/wallpaper.png ]; then
+            # Minimal valid PNG (1x1 dark blue pixel)
+            printf '\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\x0cIDATx\x9cc\x18\x05\xa3\x60\x00\x00\x00F\x00\x01\xa4\x97\x7f\xb7\x00\x00\x00\x00IEND\xaeB`\x82' > assets/wallpaper.png
+          fi
+
+      - name: Build ISO
+        run: nix build .#iso --log-format github -j$(nproc)
+
+      - name: Get ISO path
+        id: iso
+        run: |
+          ISO=$(readlink -f result/iso/*.iso)
+          echo "path=$ISO" >> "$GITHUB_OUTPUT"
+          echo "name=$(basename $ISO)" >> "$GITHUB_OUTPUT"
+          echo "size=$(du -h $ISO | cut -f1)" >> "$GITHUB_OUTPUT"
+
+      - name: Upload ISO as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: faraday-linux-iso
+          path: ${{ steps.iso.outputs.path }}
+          retention-days: 7    # Free storage is limited — delete after a week
+
+      - name: Summary
+        run: |
+          echo "### Faraday Linux ISO Built" >> $GITHUB_STEP_SUMMARY
+          echo "| | |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| **File** | \`${{ steps.iso.outputs.name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Size** | ${{ steps.iso.outputs.size }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Download from the **Artifacts** section above." >> $GITHUB_STEP_SUMMARY
