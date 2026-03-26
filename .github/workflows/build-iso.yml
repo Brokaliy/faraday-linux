@@ -31,7 +31,7 @@ jobs:
           fi
 
       - name: Build ISO
-        run: nix build .#iso --log-format github -j$(nproc)
+        run: nix build .#iso -j$(nproc)
 
       - name: Get ISO path
         id: iso
