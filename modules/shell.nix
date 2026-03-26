@@ -34,7 +34,7 @@
     jq           # JSON processor
     age          # Modern file encryption
     mat2         # Metadata stripping
-    shred        # Secure file deletion (coreutils)
+    # shred is part of coreutils (already in base system)
 
     # Fonts — Nerd Fonts for icons in starship, fastfetch, eza
     nerd-fonts.jetbrains-mono
