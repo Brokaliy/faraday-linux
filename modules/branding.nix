@@ -37,11 +37,8 @@
   # ---------------------------------------------------------------------------
   boot.plymouth = {
     enable = true;
-    theme = "faraday";  # Custom theme (see assets/plymouth/)
-    themePackages = [
-      # Use bgrt as fallback until custom theme is built
-      pkgs.plymouth
-    ];
+    theme = "spinner"; # Clean minimal spinner — replace with custom theme later
+    themePackages = [ pkgs.plymouth ];
   };
 
   # Clean boot — hide kernel messages, show only Plymouth splash
