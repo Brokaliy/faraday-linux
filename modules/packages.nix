@@ -79,10 +79,10 @@
     # -------------------------------------------------------------------------
     # FILE MANAGEMENT
     # -------------------------------------------------------------------------
-    dolphin              # KDE file manager
-    grim                 # Screenshot (Wayland)
-    slurp                # Region selector for screenshots
-    spectacle            # KDE screenshot tool
+    kdePackages.dolphin   # KDE file manager
+    grim                  # Screenshot (Wayland)
+    slurp                 # Region selector for screenshots
+    kdePackages.spectacle # KDE screenshot tool
 
     # -------------------------------------------------------------------------
     # MEDIA (minimal — only what's needed)
@@ -93,8 +93,8 @@
     # -------------------------------------------------------------------------
     # OFFICE / DOCUMENTS
     # -------------------------------------------------------------------------
-    libreoffice-fresh    # Office suite — open formats, no cloud
-    okular               # KDE PDF/document viewer
+    libreoffice-fresh       # Office suite — open formats, no cloud
+    kdePackages.okular      # KDE PDF/document viewer
 
     # -------------------------------------------------------------------------
     # SYSTEM TOOLS
