@@ -79,9 +79,10 @@
     # -------------------------------------------------------------------------
     # FILE MANAGEMENT
     # -------------------------------------------------------------------------
-    nautilus             # GUI file manager (GTK, works on Wayland)
+    dolphin              # KDE file manager
     grim                 # Screenshot (Wayland)
     slurp                # Region selector for screenshots
+    spectacle            # KDE screenshot tool
 
     # -------------------------------------------------------------------------
     # MEDIA (minimal — only what's needed)
@@ -93,7 +94,7 @@
     # OFFICE / DOCUMENTS
     # -------------------------------------------------------------------------
     libreoffice-fresh    # Office suite — open formats, no cloud
-    evince               # PDF viewer
+    okular               # KDE PDF/document viewer
 
     # -------------------------------------------------------------------------
     # SYSTEM TOOLS
