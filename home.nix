@@ -286,7 +286,7 @@
     [Desktop Entry]
     Type=Application
     Name=Faraday Theme Setup
-    Exec=bash -c 'sleep 3 && plasma-apply-colorscheme FaradayDark && plasma-apply-cursortheme Bibata-Modern-Ice && plasma-apply-wallpaperimage /etc/faraday/logo.png && kwriteconfig6 --file kdeglobals --group General --key ColorScheme FaradayDark && kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus-Dark && kwriteconfig6 --file plasmarc --group Theme --key name breeze-dark && qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null || true'
+    Exec=bash -c 'sleep 3 && plasma-apply-colorscheme FaradayDark && plasma-apply-cursortheme Bibata-Modern-Ice && plasma-apply-wallpaperimage /etc/faraday/wallpaper.png && kwriteconfig6 --file kdeglobals --group General --key ColorScheme FaradayDark && kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus-Dark && kwriteconfig6 --file plasmarc --group Theme --key name breeze-dark && qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null || true'
     X-KDE-autostart-phase=1
     StartupNotify=false
   '';

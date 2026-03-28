@@ -127,7 +127,7 @@
   # The actual PNG is in assets/wallpaper.png
   # Hyprpaper picks it up via config/hyprland.conf
   # ---------------------------------------------------------------------------
-  environment.etc."faraday/wallpaper.png".source = ../assets/logo.png;
+  environment.etc."faraday/wallpaper.png".source = ../assets/wallpaper.png;
   environment.etc."faraday/logo.png".source = ../assets/logo.png;
 
   # ---------------------------------------------------------------------------
