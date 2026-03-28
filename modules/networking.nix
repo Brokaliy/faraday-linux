@@ -153,34 +153,37 @@
         chain output_nat {
           type nat hook output priority -100;
 
-          # Exempt Tor's own outbound connections — prevents redirect loop
+          # Exempt Tor's own outbound — prevents redirect loop
           meta skuid tor return
 
-          # Loopback never needs to go through Tor
+          # Exempt root — mullvad-daemon, system services, package managers
+          # must reach the internet directly (Mullvad API, NixOS cache, etc.)
+          meta skuid root return
+
+          # Loopback stays local
           oif lo return
 
-          # Redirect DNS to Tor's DNSPort (resolves .onion + hides DNS)
+          # Redirect DNS to Tor's DNSPort
           meta l4proto udp udp dport 53 redirect to :5353
           meta l4proto tcp tcp dport 53 redirect to :5353
 
-          # Redirect all TCP to Tor's TransPort
+          # Redirect all other TCP through Tor TransPort
           meta l4proto tcp redirect to :9040
         }
 
         chain output_filter {
           type filter hook output priority 0; policy accept;
 
-          # Allow Tor's own outbound traffic through unconditionally
+          # Tor and root pass through unconditionally
           meta skuid tor accept
+          meta skuid root accept
 
-          # Allow loopback
+          # Loopback always allowed
           oif lo accept
 
-          # Drop all UDP except DNS (already redirected above).
-          # Tor cannot proxy UDP — better to drop than to leak.
-          meta l4proto udp drop
+          # Drop non-DNS UDP — Tor can't proxy it, and we don't want leaks
+          meta l4proto udp udp dport != 53 drop
 
-          # Allow established/related and new TCP
           ct state { established, related } accept
           ct state new accept
         }

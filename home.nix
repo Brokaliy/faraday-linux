@@ -267,75 +267,37 @@
 
   # ---------------------------------------------------------------------------
   # KDE PLASMA THEMING
-  # Deploy Faraday color scheme + KDE config to activate it on first login
+  # Color scheme available in user share (plasma-apply-colorscheme reads here)
+  # System-wide /etc/xdg/ config handles the actual defaults (see desktop.nix)
   # ---------------------------------------------------------------------------
 
-  # Faraday color scheme (dark blue/cyan) — selectable in System Settings
+  # Faraday color scheme in user share so System Settings can show it
   home.file.".local/share/color-schemes/FaradayDark.colors".source = ./assets/kde/faraday.colors;
 
-  # kdeglobals — activate Faraday color scheme, Papirus icons, font
-  home.file.".config/kdeglobals".text = ''
-    [ColorScheme]
-    Name=Faraday Dark
-
+  # Kvantum user config — use KvDark base theme
+  home.file.".config/Kvantum/kvantum.kvconfig".text = ''
     [General]
-    ColorScheme=FaradayDark
-    Name=Faraday Dark
-
-    [Icons]
-    Theme=Papirus-Dark
-
-    [KDE]
-    SingleClick=false
-    LookAndFeelPackage=org.kde.breezedark.desktop
-    AnimationDurationFactor=0.5
-
-    [WM]
-    activeBackground=10,13,20
-    activeBlend=125,207,255
-    activeForeground=125,207,255
-    inactiveBackground=10,13,20
-    inactiveBlend=100,130,180
-    inactiveForeground=100,130,180
+    theme=KvDark
   '';
 
-  # kwinrc — window decorations + effects (blur, wobbly off for performance)
-  home.file.".config/kwinrc".text = ''
-    [Compositing]
-    AnimationSpeed=3
-    Backend=OpenGL
-    GLCore=true
-    OpenGLIsUnsafe=false
-
-    [Effect-overview]
-    BorderActivate=9
-
-    [Plugins]
-    blurEnabled=true
-    kwin4_effect_fadeEnabled=true
-    kwin4_effect_maximizeEnabled=true
-    kwin4_effect_scaleEnabled=true
-    wobblyWindowsEnabled=false
-    zoomEnabled=false
-
-    [Windows]
-    BorderlessMaximizedWindows=false
-    FocusPolicy=ClickToFocus
+  # Autostart — apply theme via plasma CLI tools on every login
+  # This is the ONLY reliable way to force KDE to use our color scheme.
+  home.file.".config/autostart/faraday-theme.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Faraday Theme Setup
+    Exec=bash -c 'sleep 3 && plasma-apply-colorscheme FaradayDark && plasma-apply-cursortheme Bibata-Modern-Ice && plasma-apply-wallpaperimage /etc/faraday/logo.png && kwriteconfig6 --file kdeglobals --group General --key ColorScheme FaradayDark && kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus-Dark && kwriteconfig6 --file plasmarc --group Theme --key name breeze-dark && qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null || true'
+    X-KDE-autostart-phase=1
+    StartupNotify=false
   '';
 
-  # Plasma panel / global theme hint (uses Breeze Dark base + our color scheme)
-  home.file.".config/plasmarc".text = ''
-    [Theme]
-    name=breeze-dark
-  '';
-
-  # KDE autostart — show Faraday status notification on login
+  # Autostart — security status notification
   home.file.".config/autostart/faraday-status.desktop".text = ''
     [Desktop Entry]
     Type=Application
     Name=Faraday Status
-    Exec=bash -c 'sleep 5 && notify-send -i security-high -u normal "Faraday Linux" "$(systemctl is-active tor >/dev/null && echo "✓ Tor active" || echo "✗ Tor inactive") | $(mullvad status 2>/dev/null | head -1 || echo "Mullvad: check status")"'
-    X-KDE-autostart-after=panel
+    Exec=bash -c 'sleep 6 && notify-send -i security-high -u normal "Faraday Linux" "$(systemctl is-active tor >/dev/null 2>&1 && echo "✓ Tor active" || echo "✗ Tor INACTIVE") | $(mullvad status 2>/dev/null | head -1 || echo "Mullvad: not connected")"'
+    X-KDE-autostart-phase=2
     StartupNotify=false
   '';
 
