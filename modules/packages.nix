@@ -102,7 +102,6 @@
     kdePackages.ark          # Archive manager (zip/tar/7z)
     kdePackages.kleopatra    # GPG/certificate manager
     kdePackages.gwenview     # Image viewer
-    kdePackages.kdeconnect   # Phone integration (optional)
     kdePackages.kalarm       # Alarm/reminder app
 
     # -------------------------------------------------------------------------
