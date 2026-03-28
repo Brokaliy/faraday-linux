@@ -118,7 +118,7 @@
     thunderbird          # Email — configure with Tor SOCKS5 proxy
     onionshare           # Secure file sharing over Tor hidden service
     element-desktop      # Matrix client — E2E encrypted, decentralized
-    discord              # Discord (unfree, Electron)
+    vesktop              # Discord client for Linux — no broken self-updater
     telegram-desktop     # Telegram — E2E secret chats
 
     # -------------------------------------------------------------------------
