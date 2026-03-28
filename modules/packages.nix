@@ -137,7 +137,7 @@
     yara                 # Malware pattern matching
     clamav               # Antivirus scanner
     lynis                # Security auditing
-    chkrootkit           # Rootkit scanner
+
     firejail             # App sandboxing
     i2pd                 # I2P anonymous network
     masscan              # Fast port scanner
