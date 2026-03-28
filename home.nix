@@ -286,7 +286,7 @@
     [Desktop Entry]
     Type=Application
     Name=Faraday Theme Setup
-    Exec=bash -c 'sleep 3 && plasma-apply-colorscheme FaradayDark && plasma-apply-cursortheme Bibata-Modern-Ice && plasma-apply-wallpaperimage /etc/faraday/wallpaper.png && kwriteconfig6 --file kdeglobals --group General --key ColorScheme FaradayDark && kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus-Dark && kwriteconfig6 --file plasmarc --group Theme --key name breeze-dark && qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null || true'
+    Exec=bash -c 'sleep 3 && plasma-apply-colorscheme FaradayDark && plasma-apply-cursortheme Bibata-Modern-Ice && plasma-apply-wallpaperimage /etc/faraday/wallpaper.png && kwriteconfig6 --file kdeglobals --group General --key ColorScheme FaradayDark && kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus-Dark && kwriteconfig6 --file plasmarc --group Theme --key name breeze-dark && kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc --group "Containments][2][Applets][2][Configuration][General" --key icon /etc/faraday/logo.png && qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null || true'
     X-KDE-autostart-phase=1
     StartupNotify=false
   '';
@@ -304,10 +304,18 @@
   # ---------------------------------------------------------------------------
   # CONFIG FILE SYMLINKS
   # ---------------------------------------------------------------------------
-  # KDE wallpaper — Tux-in-cage logo
+  # KDE panel + wallpaper config
+  # Containment 1 = desktop, Containment 2 = bottom panel
+  # Applet 2 = Kickoff launcher (Application Launcher button)
   home.file.".config/plasma-org.kde.plasma.desktop-appletsrc".text = ''
     [Containments][1][Wallpaper][org.kde.image][General]
-    Image=/etc/faraday/logo.png
+    Image=/etc/faraday/wallpaper.png
+
+    [Containments][2][Applets][2][Configuration][General]
+    icon=/etc/faraday/logo.png
+
+    [Containments][3][Applets][2][Configuration][General]
+    icon=/etc/faraday/logo.png
   '';
 
   home.file.".config/fastfetch/config.jsonc".source = ./assets/shell/fastfetch.jsonc;
