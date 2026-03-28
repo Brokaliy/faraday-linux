@@ -71,8 +71,7 @@
     {
       "type": "gpu",
       "key": "󰾲 GPU",
-      "keyColor": "38;2;125;207;255",
-      "detectionMethod": "auto"
+      "keyColor": "38;2;125;207;255"
     },
     {
       "type": "memory",
@@ -95,7 +94,7 @@
       "type": "command",
       "key": "󰦝 Tor",
       "keyColor": "38;2;125;207;255",
-      "text": "systemctl is-active tor >/dev/null 2>&1 && echo '\033[32mactive\033[0m' || echo '\033[31minactive\033[0m'"
+      "text": "systemctl is-active tor 2>/dev/null && echo '\u001b[32mactive\u001b[0m' || echo '\u001b[31minactive\u001b[0m'"
     },
     {
       "type": "command",
@@ -107,7 +106,7 @@
       "type": "command",
       "key": "󰩠 DNS",
       "keyColor": "38;2;125;207;255",
-      "text": "systemctl is-active dnscrypt-proxy >/dev/null 2>&1 && echo '\033[32mencrypted\033[0m' || echo '\033[33msystem\033[0m'"
+      "text": "systemctl is-active dnscrypt-proxy 2>/dev/null && echo '\u001b[32mencrypted\u001b[0m' || echo '\u001b[33msystem\u001b[0m'"
     },
 
     // ── Color palette ────────────────────────────────────────────────────────

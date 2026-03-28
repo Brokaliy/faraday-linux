@@ -112,11 +112,37 @@
     gparted              # Partition editor
 
     # -------------------------------------------------------------------------
-    # PRIVACY COMMS (extra)
+    # COMMUNICATIONS
     # -------------------------------------------------------------------------
     thunderbird          # Email — configure with Tor SOCKS5 proxy
     onionshare           # Secure file sharing over Tor hidden service
     element-desktop      # Matrix client — E2E encrypted, decentralized
+    discord              # Discord (unfree, Electron)
+    telegram-desktop     # Telegram — E2E secret chats
+
+    # -------------------------------------------------------------------------
+    # SECURITY & PENTESTING
+    # -------------------------------------------------------------------------
+    john                 # Password cracker (John the Ripper)
+    hashcat              # GPU password cracker
+    thc-hydra            # Network login brute-forcer
+    sqlmap               # SQL injection scanner
+    nikto                # Web server vulnerability scanner
+    netcat-openbsd       # TCP/UDP network tool
+    tcpdump              # Packet capture
+    proxychains-ng       # Proxy chaining for any app
+    steghide             # Steganography tool
+    binwalk              # Firmware / binary analysis
+    yara                 # Malware pattern matching
+    clamav               # Antivirus scanner
+    lynis                # Security auditing
+    rkhunter             # Rootkit scanner
+    firejail             # App sandboxing
+    i2pd                 # I2P anonymous network
+    masscan              # Fast port scanner
+    gobuster             # Directory / DNS brute-forcer
+    ffuf                 # Web fuzzer
+    electrum             # Bitcoin wallet
 
     # -------------------------------------------------------------------------
     # DEVELOPMENT

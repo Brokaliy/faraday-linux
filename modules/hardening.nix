@@ -228,6 +228,11 @@
   # Disable hibernation — hibernation writes RAM to disk unencrypted
   security.protectKernelImage = true;
 
+  # Allow unprivileged user namespaces — required for Electron apps (Signal,
+  # Discord, VSCodium, Telegram) which use Chrome's sandbox. The hardened
+  # kernel disables this by default; re-enable selectively.
+  security.unprivilegedUsernsClone = true;
+
   # Time sync via NTP with randomized delays to resist timing correlation attacks
   services.timesyncd.enable = true;
   networking.timeServers = [
