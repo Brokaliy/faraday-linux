@@ -66,9 +66,7 @@
     {
       "type": "cpu",
       "key": " CPU",
-      "keyColor": "38;2;125;207;255",
-      "showPeCoreCount": true,
-      "temp": false
+      "keyColor": "38;2;125;207;255"
     },
     {
       "type": "gpu",
@@ -109,7 +107,7 @@
       "type": "command",
       "key": "󰩠 DNS",
       "keyColor": "38;2;125;207;255",
-      "text": "systemctl is-active dnscrypt-proxy2 >/dev/null 2>&1 && echo '\033[32mencrypted\033[0m' || echo '\033[33msystem\033[0m'"
+      "text": "systemctl is-active dnscrypt-proxy >/dev/null 2>&1 && echo '\033[32mencrypted\033[0m' || echo '\033[33msystem\033[0m'"
     },
 
     // ── Color palette ────────────────────────────────────────────────────────

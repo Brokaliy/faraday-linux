@@ -266,6 +266,80 @@
   };
 
   # ---------------------------------------------------------------------------
+  # KDE PLASMA THEMING
+  # Deploy Faraday color scheme + KDE config to activate it on first login
+  # ---------------------------------------------------------------------------
+
+  # Faraday color scheme (dark blue/cyan) — selectable in System Settings
+  home.file.".local/share/color-schemes/FaradayDark.colors".source = ./assets/kde/faraday.colors;
+
+  # kdeglobals — activate Faraday color scheme, Papirus icons, font
+  home.file.".config/kdeglobals".text = ''
+    [ColorScheme]
+    Name=Faraday Dark
+
+    [General]
+    ColorScheme=FaradayDark
+    Name=Faraday Dark
+
+    [Icons]
+    Theme=Papirus-Dark
+
+    [KDE]
+    SingleClick=false
+    LookAndFeelPackage=org.kde.breezedark.desktop
+    AnimationDurationFactor=0.5
+
+    [WM]
+    activeBackground=10,13,20
+    activeBlend=125,207,255
+    activeForeground=125,207,255
+    inactiveBackground=10,13,20
+    inactiveBlend=100,130,180
+    inactiveForeground=100,130,180
+  '';
+
+  # kwinrc — window decorations + effects (blur, wobbly off for performance)
+  home.file.".config/kwinrc".text = ''
+    [Compositing]
+    AnimationSpeed=3
+    Backend=OpenGL
+    GLCore=true
+    OpenGLIsUnsafe=false
+
+    [Effect-overview]
+    BorderActivate=9
+
+    [Plugins]
+    blurEnabled=true
+    kwin4_effect_fadeEnabled=true
+    kwin4_effect_maximizeEnabled=true
+    kwin4_effect_scaleEnabled=true
+    wobblyWindowsEnabled=false
+    zoomEnabled=false
+
+    [Windows]
+    BorderlessMaximizedWindows=false
+    FocusPolicy=ClickToFocus
+  '';
+
+  # Plasma panel / global theme hint (uses Breeze Dark base + our color scheme)
+  home.file.".config/plasmarc".text = ''
+    [Theme]
+    name=breeze-dark
+  '';
+
+  # KDE autostart — show Faraday status notification on login
+  home.file.".config/autostart/faraday-status.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Faraday Status
+    Exec=bash -c 'sleep 5 && notify-send -i security-high -u normal "Faraday Linux" "$(systemctl is-active tor >/dev/null && echo "✓ Tor active" || echo "✗ Tor inactive") | $(mullvad status 2>/dev/null | head -1 || echo "Mullvad: check status")"'
+    X-KDE-autostart-after=panel
+    StartupNotify=false
+  '';
+
+  # ---------------------------------------------------------------------------
   # CONFIG FILE SYMLINKS
   # ---------------------------------------------------------------------------
   home.file.".config/fastfetch/config.jsonc".source = ./assets/shell/fastfetch.jsonc;

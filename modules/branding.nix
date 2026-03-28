@@ -105,10 +105,9 @@
     }
   '';
 
-  # Override the fastfetch command to always use our config
+  # neofetch alias points at our branded fastfetch config
   environment.shellAliases = {
-    neofetch = "fastfetch --config /etc/fastfetch/config.jsonc";
-    fastfetch = "fastfetch --config /etc/fastfetch/config.jsonc";
+    neofetch = "fastfetch --config /etc/faraday/fastfetch.jsonc";
   };
 
   # ---------------------------------------------------------------------------

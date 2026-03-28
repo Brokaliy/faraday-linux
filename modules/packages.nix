@@ -97,6 +97,15 @@
     kdePackages.okular      # KDE PDF/document viewer
 
     # -------------------------------------------------------------------------
+    # KDE UTILITIES
+    # -------------------------------------------------------------------------
+    kdePackages.ark          # Archive manager (zip/tar/7z)
+    kdePackages.kleopatra    # GPG/certificate manager
+    kdePackages.gwenview     # Image viewer
+    kdePackages.kdeconnect   # Phone integration (optional)
+    kdePackages.kalarm       # Alarm/reminder app
+
+    # -------------------------------------------------------------------------
     # SYSTEM TOOLS
     # -------------------------------------------------------------------------
     usbguard             # USB device control (also in services)
@@ -104,8 +113,16 @@
     gparted              # Partition editor
 
     # -------------------------------------------------------------------------
-    # BUILD ESSENTIALS (needed for some tools)
+    # PRIVACY COMMS (extra)
     # -------------------------------------------------------------------------
+    thunderbird          # Email — configure with Tor SOCKS5 proxy
+    onionshare           # Secure file sharing over Tor hidden service
+    element-desktop      # Matrix client — E2E encrypted, decentralized
+
+    # -------------------------------------------------------------------------
+    # DEVELOPMENT
+    # -------------------------------------------------------------------------
+    vscodium             # VSCode without Microsoft telemetry
     git
     vim
     neovim
