@@ -17,6 +17,7 @@
     # -------------------------------------------------------------------------
     firefox-esr          # Extended Support Release — less fingerprinting surface
     tor-browser          # For maximum anonymity (pre-configured, Tor built-in)
+    mullvad-browser      # Very secure mullvad browser with their VPN built in
 
     # -------------------------------------------------------------------------
     # COMMUNICATIONS
@@ -136,7 +137,7 @@
     yara                 # Malware pattern matching
     clamav               # Antivirus scanner
     lynis                # Security auditing
-    rkhunter             # Rootkit scanner
+    chkrootkit           # Rootkit scanner
     firejail             # App sandboxing
     i2pd                 # I2P anonymous network
     masscan              # Fast port scanner
