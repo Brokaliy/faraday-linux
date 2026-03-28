@@ -342,6 +342,12 @@
   # ---------------------------------------------------------------------------
   # CONFIG FILE SYMLINKS
   # ---------------------------------------------------------------------------
+  # KDE wallpaper — Tux-in-cage logo
+  home.file.".config/plasma-org.kde.plasma.desktop-appletsrc".text = ''
+    [Containments][1][Wallpaper][org.kde.image][General]
+    Image=/etc/faraday/logo.png
+  '';
+
   home.file.".config/fastfetch/config.jsonc".source = ./assets/shell/fastfetch.jsonc;
   home.file.".config/kitty/kitty.faraday.conf".source = ./assets/kitty/kitty.conf;
   home.file.".config/fish/conf.d/faraday.fish".source = ./assets/shell/config.fish;

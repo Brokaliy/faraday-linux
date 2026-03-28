@@ -16,6 +16,14 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    theme = "breeze";
+    extraConfig = ''
+      [General]
+      GreetFont=Inter 12
+
+      [Theme]
+      Background=/etc/faraday/logo.png
+    '';
   };
 
   # ---------------------------------------------------------------------------

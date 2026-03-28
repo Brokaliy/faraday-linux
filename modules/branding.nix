@@ -127,8 +127,8 @@
   # The actual PNG is in assets/wallpaper.png
   # Hyprpaper picks it up via config/hyprland.conf
   # ---------------------------------------------------------------------------
-  environment.etc."faraday/wallpaper.png".source = ../assets/wallpaper.png;
-  environment.etc."faraday/logo.svg".source = ../assets/logo.svg;
+  environment.etc."faraday/wallpaper.png".source = ../assets/logo.png;
+  environment.etc."faraday/logo.png".source = ../assets/logo.png;
 
   # ---------------------------------------------------------------------------
   # MOTD (message of the day) — shown in terminal on login
